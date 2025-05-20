@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="top">
+            <h1>Expense Tracker</h1>
+        </div>
+    </nav>
+    <div class="center">
+        <h2>Track Your Expenses Like Never Before</h2><br>
+        <h4>Take control of your finances with our powerful expense tracker application</h4><br>
+        <button class="sign-btn"><a href="/register">Sign Up Now</a></button>
+    </div>
+
+
+
+    <div class="icons-container">
+        <div class="icons">
+            <img src="{{ url_for('static', filename='images/wallet.png') }}" >
+            <div class="info">
+                <h3>Manage Your Budget</h3>
+                <p>Easily create and customizing budgets o stay on top your spending</p>
+            </div>
+        </div>
+        <div class="icons">
+            <img src="{{ url_for('static', filename='images/data.png') }}" >
+            <div class="info">
+                <h3>Analyze Your Expenses</h3>
+                <p>Visualize your expenses with interactive charts</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

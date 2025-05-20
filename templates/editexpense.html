@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Expense</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Edit Expense</h2>
+        <form method="post">
+            <label for="budget_id">Select Budget Plan:</label>
+                <select name="budget_id" required>
+                    {% for budget in budgets %}
+                        <option value="{{ budget.id }}" {% if budget.id == data.budget_id %}selected{% endif %}>
+                            {{ budget.budgetName }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+            <label for="category">Select a category:</label>
+                <select name="category_name" >
+                    <option value="foodAllocation">Food</option>
+                    <option value="transportation">Transportation</option>
+                    <option value="shopping">Shopping</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="education">Education</option>
+                    <option value="other">Other</option>
+                </select>
+            <label>Amount:</label>
+            <input type="number" name="amount" value="{{ data.amount }}" required>
+            <label>Description:</label>
+            <input type="text" name="description" value="{{ data.description }}" required>
+            <input type="submit" value="Update Expense">
+        </form>
+    </div>
+</body>
+</html>

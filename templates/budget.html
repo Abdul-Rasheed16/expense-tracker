@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Budget</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <div class="contain">
+        <h2>Create Budget</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <p class="flash-{{ category }}">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+        <form method="POST">
+            <!-- Budget Name -->
+            <label for="budgetName">Budget Name:</label>
+            <input type="text" id="budgetName" name="budgetName" required>
+
+            <!-- Budget Amount -->
+            <label for="budget">Total Budget:</label>
+            <input type="number" id="budget" name="budget" required>
+
+            <!-- Start Date -->
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required>
+
+            <!-- End Date -->
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" required>
+
+            <!-- Food Allocation -->
+            <label for="foodAllocation">Food Allocation:</label>
+            <input type="number" id="foodAllocation" name="foodAllocation" required>
+
+            <!-- Transportation Allocation -->
+            <label for="transportation">Transportation Allocation:</label>
+            <input type="number" id="transportation" name="transportation" required>
+
+            <!-- Shopping Allocation -->
+            <label for="shopping">Shopping Allocation:</label>
+            <input type="number" id="shopping" name="shopping" required>
+
+            <!-- Entertainment Allocation -->
+            <label for="entertainment">Entertainment Allocation:</label>
+            <input type="number" id="entertainment" name="entertainment" required>
+
+            <!-- Education Allocation -->
+            <label for="education">Education Allocation:</label>
+            <input type="number" id="education" name="education" required>
+
+            <!-- Food Allocation -->
+            <label for="other">Other:</label>
+            <input type="number" id="other" name="other" required>
+
+            <!-- Email -->
+            <!-- <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required> -->
+
+            <!-- Submit Button -->
+            <button type="submit">Create Budget</button>
+        </form>
+    </div>
+
+
+    <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            let monthlyIncome = parseInt(document.getElementById("budget").value);
+            let foodAllocation = parseInt(document.getElementById("foodAllocation").value);
+            let transportation = parseInt(document.getElementById("transportation").value);
+            let shopping = parseInt(document.getElementById("shopping").value);
+            let entertainment = parseInt(document.getElementById("entertainment").value);
+            let education = parseInt(document.getElementById("education").value);
+            let other = parseInt(document.getElementById("other").value);
+        
+            let totalAllocated = foodAllocation + transportation + shopping + entertainment + education + other;
+        
+            if (totalAllocated > monthlyIncome) {
+                alert("Total allocated amount exceeds Monthly Income! Please adjust your budget.");
+                event.preventDefault(); // Stop form submission
+            }
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+        let flashMessages = document.querySelectorAll("p[class^='flash-']");
+        flashMessages.forEach(msg => {
+            alert(msg.textContent);  // Show alert pop-up
+            setTimeout(() => {
+                msg.remove();
+            });
+        });
+    });
+        </script>
+</body>
+</html>

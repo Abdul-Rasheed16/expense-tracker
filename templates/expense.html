@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Expense</title>
+    <script>
+        function showAlert(message) {
+            alert(message);
+        }
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <div class="con">
+        <h2>Create Expense</h2>
+
+        <!-- If there's an error, trigger a popup alert -->
+        {% if error %}
+            <script>
+                showAlert("{{ error }}");
+            </script>
+        {% endif %}
+        
+        <form method="POST">
+            <label>Budget Plan:</label>
+            <select name="budget_id" required>
+                {% for budget in budgets %}
+                <option value="{{ budget.id }}">{{ budget.budgetName }}</option>
+                {% endfor %}
+            </select>
+        
+            <label>Category:</label>
+            <select name="category_name" required>
+                <option value="foodAllocation">Food</option>
+                <option value="transportation">Transportation</option>
+                <option value="shopping">Shopping</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="education">Education</option>
+                <option value="other">Other</option>
+            </select>
+        
+            <label>Amount:</label>
+            <input type="number" name="amount" required>
+        
+            <label>Description:</label>
+            <input type="text" name="description">
+        
+            <button type="submit">Add Expense</button>
+        </form>
+        
+        {% if error %}
+            <p style="color:red">{{ error }}</p>
+        {% endif %}
+        
+    </div>
+</body>
+</html>
